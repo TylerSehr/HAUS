@@ -184,6 +184,7 @@ li {
     size: 100%;
     align-self: center;
     max-height: 100%;
+    max-width: 100%;
     border-radius: 5px;
     z-index: -99999;
     object-fit: cover;
