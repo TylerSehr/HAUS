@@ -8,6 +8,28 @@
     <title>App</title>
   </head>
   <body>
+      <script>
+          window.fbAsyncInit = function () {
+            FB.init({
+              appId: '2432525363475394',
+              autoLogAppEvents: true,
+              xfbml: true,
+              version: 'v2.11'
+            });
+      
+            // Broadcast an event when FB object is ready
+            var fbInitEvent = new Event('FBObjectReady');
+            document.dispatchEvent(fbInitEvent);
+          };
+      
+          (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+        </script>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>

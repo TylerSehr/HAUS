@@ -16,7 +16,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
 router.post('/register', (req, res, next) => {
-  console.log('req: ', req.body);
+  pool.query(`SELECT * FROM person WHERE fb_id = req.body.password`)
   
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
