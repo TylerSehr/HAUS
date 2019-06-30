@@ -37,7 +37,7 @@ export default class FacebookLogin extends Component {
       } else {
         this.FB.login(this.facebookLoginHandler, {scope: 'public_profile'});
       }
-    }, );
+    })
   }
 
   /**
@@ -60,8 +60,9 @@ export default class FacebookLogin extends Component {
   render() {
     let {children} = this.props;
     return (
-      <div onClick={this.facebookLogin}>
+      <div onClick={this.facebookLogin} >
         {children}
+        <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/1024px-F_icon.svg.png"/>
       </div>
     );
   }

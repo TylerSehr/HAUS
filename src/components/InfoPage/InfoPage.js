@@ -26,7 +26,6 @@ class InfoPage extends Component {
       content = (
         <div>
           <p>
-            Info Page
           </p>
         </div>
       );

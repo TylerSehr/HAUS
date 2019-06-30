@@ -4,6 +4,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { connect } from 'react-redux';
 import axios from 'axios'
 
+
 const mapStateToProps = state => ({
   user: state.user,
 });
@@ -16,6 +17,8 @@ class LoginPage extends Component {
   };
 
   onFacebookLogin = (loginStatus, resultObject) => {
+    console.log(resultObject);
+    
     if (loginStatus === true) {
       this.setState({
         username: resultObject.user.name,
@@ -49,10 +52,7 @@ class LoginPage extends Component {
     console.log(this.props.user);
     
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Continue With Facebook</h1>
-        </header>
+      <div className="App" >
 
         <div className="App-intro">
           { !username &&
