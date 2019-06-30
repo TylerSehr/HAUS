@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { USER_ACTIONS } from '../actions/userActions';
 
-const id = (state = null, action) => {
+const id = (state = 3, action) => {
   switch (action.type) {
-    case USER_ACTIONS.SET_USER:
-      return action.user.id || state;
+    case 'SET_USER':
+      return action.payload.id || state;
     case USER_ACTIONS.UNSET_USER:
       return null;
     default:
@@ -12,10 +12,10 @@ const id = (state = null, action) => {
   }
 };
 
-const userName = (state = null, action) => {
+const userName = (state = 'todd', action) => {
   switch (action.type) {
-    case USER_ACTIONS.SET_USER:
-      return action.user.username || state;
+    case 'SET_USER':
+      return action.payload.username || state;
     case USER_ACTIONS.UNSET_USER:
       return null;
     default:

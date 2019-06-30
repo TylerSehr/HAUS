@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FacebookLoginButton from '../LoginButton/FacebookLoginButton';
+import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { connect } from 'react-redux';
 import axios from 'axios'
 
@@ -24,27 +25,40 @@ class LoginPage extends Component {
         username: resultObject.user.name,
         password: resultObject.user.id
       };
+      this.props.dispatch({ type: 'SET_USER', payload: this.state});
       axios.post('/api/user/register/', body)
+      .then((response)=>{
+        console.log(response);
+        window.location.href = '/#/user'
+      })
     } else {
-      alert('Facebook login error');
+      console.log('there was a login error');
+      
+    }
+  }
+
+
+  componentDidUpdate(){
+    if(this.state.username){
+      window.location.href = '/#/user'
     }
   }
 
   render() {
     const { username } = this.state;
-
+    console.log(this.props.user);
+    
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">React Social Media Login</h1>
+          <h1 className="App-title">Continue With Facebook</h1>
         </header>
 
         <div className="App-intro">
           { !username &&
             <div>
-              <p>Click on one of any button below to login</p>
               <FacebookLoginButton onLogin={this.onFacebookLogin}>
-                <button>Facebook</button>
+                <button>Login With Facebook</button>
               </FacebookLoginButton>
             </div>
           }

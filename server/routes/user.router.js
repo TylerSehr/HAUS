@@ -7,8 +7,8 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 // Handles Ajax request for user information if user is authenticated
-router.get('/', rejectUnauthenticated, (req, res) => {
-  // Send back user object from database
+router.get('/', (req, res) => {
+  
   res.send(req.user);
 });
 
@@ -16,15 +16,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
 router.post('/register', (req, res, next) => {
-  pool.query(`SELECT * FROM person WHERE fb_id = req.body.password`)
-  
-  const username = req.body.username;
-  const password = encryptLib.encryptPassword(req.body.password);
+  pool.query(`SELECT * FROM person WHERE fb_id = $1`, [req.body.password])
+    .then((result) => {
+      if (result.rows.length === 0) {
+        const username = req.body.username;
+        const password = encryptLib.encryptPassword(req.body.password);
 
-  const queryText = 'INSERT INTO person (username, password) VALUES ($1, $2) RETURNING id';
-  pool.query(queryText, [username, password])
-    .then(() => { res.sendStatus(201); })
-    .catch((err) => { next(err); });
+        const queryText = 'INSERT INTO person (username, password, fb_id) VALUES ($1, $2, $3) RETURNING id';
+        pool.query(queryText, [username, password, req.body.password])
+          .then(() => { res.sendStatus(201); })
+          .catch((err) => { next(err); });
+      }
+      else {
+        res.redirect('api/user/login');
+      }
+    })
+
+
 });
 
 // Handles login form authenticate/login POST

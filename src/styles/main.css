@@ -5,12 +5,14 @@ body {
 .instructions h1 {
     font-size: 24px;
     font-weight: 700;
+    text-align: center;
 }
 
 .instructions {
     background-color: #00acb0;
-    padding: 5px;
+    padding: 3px;
     color: #ece7e7;
+    border-radius: 5px;
 }
 
 form {
