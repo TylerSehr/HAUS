@@ -3,7 +3,7 @@ import Cards, { Card } from 'react-swipe-card'
 import { connect } from 'react-redux';
 import axios from 'axios'
 import InfoSheet from './InfoSheet'
-import { Listing, Parser } from '../../classes/Listing.class' 
+import { Listing, Parser } from '../../classes/Listing.class'
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -15,34 +15,34 @@ class SwipeDeck extends React.Component {
         super(props)
 
         this.state = {
-            data: [new Listing(['https://photos.zillowstatic.com/fp/b15d727c1a1be33098b116bb44998398-cc_ft_1536.webp'], '34528 Alberta Ter, Fremont, CA 94555'), 'Thomas', 'Lucien'],
+            data: ['https://photos.zillowstatic.com/fp/b15d727c1a1be33098b116bb44998398-cc_ft_1536.webp', 'https://photos.zillowstatic.com/cc_ft_1536/ISqlt6am48y65l1000000000.webp', 'https://photos.zillowstatic.com/cc_ft_1536/ISe0xtpecrnwog1000000000.webp', 'https://photos.zillowstatic.com/cc_ft_1536/ISqxq05su6cmeh1000000000.webp', 'https://photos.zillowstatic.com/cc_ft_1536/IS2zbvrh1rdjhw0000000000.webp'],
             contacted: [],
             saved: []
         }
     }
 
     componentDidMount() {
-        Parser.parseCraigsList(this.props.settings.region, this.props.settings.price);
+        // Parser.parseCraigsList(this.props.settings.region, this.props.settings.price);
     }
 
     action = (direction, item) => {
-        if (direction === 'right'){
+        if (direction === 'right') {
             this.setState({
                 contacted: [
                     ...this.state.contacted,
                     item
                 ]
             })
-            alert('email  sent!')
+            // alert('email  sent!')
         }
-        else if (direction === 'up'){
+        else if (direction === 'up') {
             this.setState({
                 saved: [
                     ...this.state.saved,
                     item
                 ]
             })
-            alert('contact info saved and email sent!')
+            // alert('contact info saved and email sent!')
         }
     }
 
@@ -52,7 +52,7 @@ class SwipeDeck extends React.Component {
     }
 
     render() {
-        
+
         return (
             <div>
                 <Cards onEnd={() => this.action('end')} className='master-root' >
@@ -63,13 +63,12 @@ class SwipeDeck extends React.Component {
                             onSwipeRight={() => this.action('right', item)}
                             onSwipeTop={() => this.action('up', item)}>
                             <div className="clickcard" onClick={() => this.showInfo(item)}>
-                                <h2>{item}</h2>
+                                <img src={item} className="cardpic" />
                             </div>
-                            <InfoSheet card={item}/>
                         </Card>
                     )}
                 </Cards>
-                
+                {/* <InfoSheet card={item} /> */}
             </div>
         )
     }

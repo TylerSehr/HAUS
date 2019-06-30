@@ -54,9 +54,9 @@ class LoginPage extends Component {
     return (
       <div className="App" >
         <div className="App-intro">
-            <div className="signin">
+            <div>
               <FacebookLoginButton onLogin={this.onFacebookLogin}>
-                <button className="login">Login With Facebook</button>
+                <button className="fb connect">Sign in with Facebook</button>
               </FacebookLoginButton>
             </div>
         </div>
