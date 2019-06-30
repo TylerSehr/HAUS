@@ -1,27 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios'
 
 import Nav from '../../components/Nav/Nav';
 import NavDrawer from '../Nav/NavDrawer'
 import SwipeDeck from './SwipeDeck'
 
-import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
-
-
 const mapStateToProps = state => ({
-  user: state.user,
+  listings: state.listings || '',
+  settings: state.settings,
+  user: state.user
 });
 
 class UserPage extends Component {
-  componentDidMount() {
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+  constructor(props) {
+    super(props)
+
   }
 
-  componentDidUpdate() {
+  componentDidMount = () => {
+    console.log('hi');
+
+    axios.post('/api/settings/get', this.props.user)
+      .then((response) => {
+        console.log('got settings', response);
+        this.props.dispatch({ type: 'GET_SETTINGS', payload: response.data })
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  componentDidUpdate = () => {
     if (!this.props.user.isLoading && this.props.user.userName === null) {
       this.props.history.push('home');
     }
+    if (this.props.listings == 1) {
+      this.props.dispatch({ type: 'GET_LISTINGS', payload: this.props.settings });
+    }
+
   }
 
 
@@ -41,7 +58,7 @@ class UserPage extends Component {
       <div>
         <Nav />
         {/* <NavDrawer /> */}
-        { content }
+        {content}
       </div>
     );
   }

@@ -13,6 +13,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const settingsRouter = require('./routes/settings.router')
 
 const certOptions = {
   key: fs.readFileSync(path.resolve('./server/server.key')),
@@ -32,6 +33,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/settings', settingsRouter);
 
 // Serve static files
 app.use(express.static('build'));

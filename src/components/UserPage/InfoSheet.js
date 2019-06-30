@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../../components/Nav/Nav';
 
 
 
@@ -21,20 +20,16 @@ class InfoSheet extends Component {
 
   render() {
 
-    content = (
-        
-    )
 
 
     return (
-      <div>
-        <Nav />
-        { content }
+      <div className="infosheet">
+        {this.props.card}
       </div>
     );
   }
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(UserPage);
+export default connect(mapStateToProps)(InfoSheet);
 

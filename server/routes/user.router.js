@@ -31,6 +31,10 @@ router.post('/register', (req, res, next) => {
         res.redirect('api/user/login');
       }
     })
+    .catch((err)=>{
+      console.log(err);
+      
+    })
 
 
 });

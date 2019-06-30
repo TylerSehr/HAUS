@@ -11,6 +11,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
+import SettingsPage from './components/SettingsPage/SettingsPage'
 
 import './styles/main.css';
 
@@ -25,15 +26,15 @@ const App = () => (
           component={LoginPage}
         />
         <Route
-          path="/register"
-          component={RegisterPage}
+          path="/settings" 
+          component={SettingsPage}
         />
         <Route
           path="/user"
           component={UserPage}
         />
         <Route
-          path="/info"
+          path="/saved-listings"
           component={InfoPage}
         />
         {/* OTHERWISE (no path!) */}
